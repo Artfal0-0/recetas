@@ -1,11 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Recetas</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
+
 <body>
-    <h1>Recetas</h1>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/logo.png" alt="Logo">
+                <span>Cookpad</span>
+            </div>
+
+            <nav>
+                <div class="nav-item">
+                    <svg>
+                        <use xlink:href="#search"></use>
+                    </svg>
+                    <span>Buscar</span>
+                </div>
+                <div class="nav-item">
+                    <svg>
+                        <use xlink:href="#trophy"></use>
+                    </svg>
+                    <span>Premium</span>
+                </div>
+                <div class="nav-item">
+                    <svg>
+                        <use xlink:href="#flag"></use>
+                    </svg>
+                    <span>Retos</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-user">
+                <img src="img/usuario.png" alt="Usuario" class="user-icon">
+                <span class="username">usuario</span>
+            </div>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <!-- Header -->
+            <header class="header">
+                <div class="header-logo">
+                    <img src="img/logo.png" alt="Logo">
+                    <span>Busqueda de recetas</span>
+                </div>
+                <button class="btn-create">
+                    Crear
+                </button>
+            </header>
+            <form class="search-form">
+                <input type="text" class="search-input" placeholder="Busca por receta o ingredientes">
+                <button type="submit" class="search-btn">Buscar</button>
+            </form>
+            <!-- Palabras populares -->
+            <section>
+                <h2 class="section-title">Palabras populares</h2>
+                <p class="updated">Actualizado a las 15:20</p>
+
+                <div class="keywords">
+                    <div class="keyword-card">
+                        <img src="img/segundo_plato.png" alt="segundos platos">
+                        <p>segundos platos</p>
+                    </div>
+                    <div class="keyword-card">
+                        <img src="img/patatas.png" alt="patatas">
+                        <p>patatas</p>
+                    </div>
+                    <div class="keyword-card">
+                        <img src="img/desayuno.png" alt="desayuno">
+                        <p>desayuno</p>
+                    </div>
+                    
+                    <div class="keyword-card">
+                        <img alt="albóndigas">
+                        <p>albóndigas</p>
+                    </div>
+                    <div class="keyword-card">
+                        <img alt="lentejas">
+                        <p>lentejas</p>
+                    </div>
+                    <div class="keyword-card">
+                        <img alt="halloween">
+                        <p>halloween</p>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <!-- Premium -->
+            <section class="premium">
+                <h3 class="premium-title">
+                    Premium
+                </h3>
+
+                <div class="premium-grid">
+                    <div class="premium-card">
+                        <img alt="Pollo al horno">
+                    </div>
+                    <div class="premium-card">
+                        <img alt="Ensalada con pollo">
+                    </div>
+                    <div class="premium-card">
+                        <img alt="Nuggets crujientes">
+                    </div>
+                </div>
+                <div class="img-footer">
+                    <img src="img/footer.png" alt="footer">
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+
+    </footer>
+
 </body>
+
 </html>
