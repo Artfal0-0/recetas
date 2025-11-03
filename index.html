@@ -1,122 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recetas</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Cookpad - Recetas Deliciosas</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
 <body>
 
+    <!-- Overlay para cerrar sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="container">
 
         <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="img/logo.png" alt="Logo">
-                <span>Cookpad</span>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <div class="logo">
+                    <img src="img/logo.png" alt="Logo Cookpad">
+                    <span>Recetas</span>
+                    <!-- Botón cerrar sidebar (solo móvil) -->
+                    
+                </div>
+
+                <nav class="nav-menu">
+                    <button class="nav-item active">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <span>Buscar</span>
+                    </button>
+                    <button class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                            <path d="M4 22h16"></path>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                        </svg>
+                        <span>Premium</span>
+                    </button>
+                    <button class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                            <line x1="4" y1="22" x2="4" y2="15"></line>
+                        </svg>
+                        <span>Retos</span>
+                    </button>
+                </nav>
+
+                <!-- Crear receta -->
+                <div class="create-section">
+                    <button class="btn-create-sidebar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Crear receta</span>
+                    </button>
+                </div>
+
+                <div class="sidebar-user">
+                    <img src="img/usuario.png" alt="Usuario" class="user-avatar">
+                    <div class="user-info">
+                        <span class="username">usuario</span>
+                        <span class="user-subtitle">Ver perfil</span>
+                    </div>
+                </div>
             </div>
-
-            <nav>
-                <div class="nav-item">
-                    <svg>
-                        <use xlink:href="#search"></use>
-                    </svg>
-                    <span>Buscar</span>
-                </div>
-                <div class="nav-item">
-                    <svg>
-                        <use xlink:href="#trophy"></use>
-                    </svg>
-                    <span>Premium</span>
-                </div>
-                <div class="nav-item">
-                    <svg>
-                        <use xlink:href="#flag"></use>
-                    </svg>
-                    <span>Retos</span>
-                </div>
-            </nav>
-
-            <div class="sidebar-user">
-                <img src="img/usuario.png" alt="Usuario" class="user-icon">
-                <span class="username">usuario</span>
-            </div>
-
         </aside>
 
         <!-- Main Content -->
         <main class="main">
 
+            <!-- Botón menú (siempre visible) -->
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menú">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
             <!-- Header -->
             <header class="header">
                 <div class="header-logo">
                     <img src="img/logo.png" alt="Logo">
-                    <span>Busqueda de recetas</span>
+                    <div>
+                        <h1>Búsqueda de recetas</h1>
+                        <p class="header-subtitle">Descubre y comparte tus recetas favoritas</p>
+                    </div>
                 </div>
-                <button class="btn-create">
-                    Crear
-                </button>
             </header>
+
+            <!-- Search Form -->
             <form class="search-form">
-                <input type="text" class="search-input" placeholder="Busca por receta o ingredientes">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" class="search-input" placeholder="Busca por receta o ingredientes...">
+                </div>
                 <button type="submit" class="search-btn">Buscar</button>
             </form>
-            <!-- Palabras populares -->
-            <section>
-                <h2 class="section-title">Palabras populares</h2>
-                <p class="updated">Actualizado a las 15:20</p>
+
+            <!-- Recetas populares -->
+            <section class="popular-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <span class="title-icon">🔥</span>
+                        Recetas populares
+                    </h2>
+                </div>
 
                 <div class="keywords">
                     <div class="keyword-card">
-                        <img src="img/segundo_plato.png" alt="segundos platos">
-                        <p>segundos platos</p>
+                        <div class="keyword-image">
+                            <img src="img/segundo_plato.png" alt="segundos platos">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">segundos platos</p>
+                        <span class="keyword-count">256 recetas</span>
                     </div>
                     <div class="keyword-card">
-                        <img src="img/patatas.png" alt="patatas">
-                        <p>patatas</p>
+                        <div class="keyword-image">
+                            <img src="img/patatas.png" alt="patatas">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">patatas</p>
+                        <span class="keyword-count">189 recetas</span>
                     </div>
                     <div class="keyword-card">
-                        <img src="img/desayuno.png" alt="desayuno">
-                        <p>desayuno</p>
-                    </div>
-                    
-                    <div class="keyword-card">
-                        <img alt="albóndigas">
-                        <p>albóndigas</p>
-                    </div>
-                    <div class="keyword-card">
-                        <img alt="lentejas">
-                        <p>lentejas</p>
+                        <div class="keyword-image">
+                            <img src="img/desayuno.png" alt="desayuno">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">desayuno</p>
+                        <span class="keyword-count">342 recetas</span>
                     </div>
                     <div class="keyword-card">
-                        <img alt="halloween">
-                        <p>halloween</p>
+                        <div class="keyword-image">
+                            <img src="img/albondigas.png" alt="albóndigas">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">albóndigas</p>
+                        <span class="keyword-count">127 recetas</span>
                     </div>
-                    
+                    <div class="keyword-card">
+                        <div class="keyword-image">
+                            <img src="img/lentejas.png" alt="lentejas">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">lentejas</p>
+                        <span class="keyword-count">98 recetas</span>
+                    </div>
+                    <div class="keyword-card">
+                        <div class="keyword-image">
+                            <img src="img/halloween.png" alt="halloween">
+                            <div class="keyword-overlay"></div>
+                        </div>
+                        <p class="keyword-text">halloween</p>
+                        <span class="keyword-count">74 recetas</span>
+                    </div>
                 </div>
             </section>
 
             <!-- Premium -->
             <section class="premium">
-                <h3 class="premium-title">
-                    Premium
-                </h3>
+                <div class="premium-content">
+                    <div class="premium-header">
+                        <h3 class="premium-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                            </svg>
+                            Recetas Premium
+                        </h3>
+                        <span class="premium-badge">✨ Exclusivo</span>
+                    </div>
 
-                <div class="premium-grid">
-                    <div class="premium-card">
-                        <img alt="Pollo al horno">
-                    </div>
-                    <div class="premium-card">
-                        <img alt="Ensalada con pollo">
-                    </div>
-                    <div class="premium-card">
-                        <img alt="Nuggets crujientes">
+                    <div class="premium-grid">
+                        <div class="premium-card">
+                            <img src="img/pollo_horno.png" alt="Pollo al horno">
+                            <div class="premium-overlay">
+                                <div class="premium-info">
+                                    <span class="premium-label">Premium</span>
+                                    <h4>Pollo al horno</h4>
+                                    <p>⏱️ 45 min | 👨‍🍳 Fácil</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="premium-card">
+                            <img src="img/ensalada_pollo.png" alt="Ensalada con pollo">
+                            <div class="premium-overlay">
+                                <div class="premium-info">
+                                    <span class="premium-label">Premium</span>
+                                    <h4>Ensalada con pollo</h4>
+                                    <p>⏱️ 20 min | 👨‍🍳 Fácil</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="premium-card">
+                            <img src="img/nuggets.png" alt="Nuggets crujientes">
+                            <div class="premium-overlay">
+                                <div class="premium-info">
+                                    <span class="premium-label">Premium</span>
+                                    <h4>Nuggets crujientes</h4>
+                                    <p>⏱️ 30 min | 👨‍🍳 Media</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Footer image: ancho completo del main -->
                 <div class="img-footer">
                     <img src="img/footer.png" alt="footer">
                 </div>
@@ -125,9 +233,34 @@
         </main>
     </div>
 
-    <footer>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-    </footer>
+        const toggleSidebar = (open) => {
+            const isOpen = sidebar.classList.contains('active');
+            const shouldOpen = open !== undefined ? open : !isOpen;
+
+            sidebar.classList.toggle('active', shouldOpen);
+            sidebar.classList.toggle('closed', !shouldOpen);
+            sidebarOverlay.classList.toggle('active', shouldOpen);
+            document.body.classList.toggle('sidebar-open', shouldOpen);
+            document.body.classList.toggle('sidebar-closed', !shouldOpen);
+        };
+
+        sidebarToggle.addEventListener('click', () => toggleSidebar());
+        sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+        // Cerrar al hacer clic en nav-item (solo en móvil)
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 992) toggleSidebar(false);
+            });
+        });
+        
+    </script>
+
 
 </body>
 
