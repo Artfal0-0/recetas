@@ -4,28 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookpad - Recetas Deliciosas</title>
+    <title>Recetas Deliciosas</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
+<style>
+    /* estilos unicamente para el formulario de recetas */
+    .form-receta {
+        background: var(--white);
+        padding: 40px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        border: 2px solid var(--border-color);
+        margin-top: 40px;
+    }
+
+    .form-receta .section-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .form-receta .form-subtitle {
+        color: var(--text-medium);
+        font-size: 15px;
+        margin-bottom: 32px;
+    }
+
+    .receta-form label {
+        display: block;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+        margin-top: 18px;
+    }
+
+    .receta-form .required {
+        color: red;
+    }
+
+    .receta-form input[type="text"],
+    .receta-form input[type="email"],
+    .receta-form input[type="number"],
+    .receta-form input[type="date"],
+    .receta-form select,
+    .receta-form textarea,
+    .receta-form input[type="file"] {
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-md);
+        background: var(--background-alt);
+        font-size: 15px;
+        color: var(--text-dark);
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .receta-form input:focus,
+    .receta-form textarea:focus,
+    .receta-form select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    }
+
+    .radio-group,
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 8px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+        font-weight: 500;
+        color: var(--text-medium);
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 16px;
+        margin-top: 32px;
+    }
+
+    .form-buttons input[type="submit"],
+    .form-buttons input[type="reset"] {
+        flex: 1;
+        padding: 14px;
+        font-weight: 700;
+        border: none;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: var(--shadow-md);
+    }
+
+    .form-buttons input[type="submit"] {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+    }
+
+    .form-buttons input[type="submit"]:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .form-buttons input[type="reset"] {
+        background: var(--background-alt);
+        color: var(--text-dark);
+        border: 2px solid var(--border-color);
+    }
+
+    .form-buttons input[type="reset"]:hover {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+</style>
 
 <body>
-
-    <!-- Overlay para cerrar sidebar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
     <div class="container">
-
-        <!-- Sidebar -->
+        <!-- barra lateral (sidebar) -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
                 <div class="logo">
-                    <img src="img/logo.png" alt="Logo Cookpad">
+                    <img src="img/logo.png" alt="Logo">
                     <span>Recetas</span>
-                    <!-- Botón cerrar sidebar (solo móvil) -->
-                    
                 </div>
-
                 <nav class="nav-menu">
                     <button class="nav-item active">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -56,19 +168,17 @@
                         <span>Retos</span>
                     </button>
                 </nav>
-
                 <!-- Crear receta -->
-                <div class="create-section">
-                    <button class="btn-create-sidebar">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        <span>Crear receta</span>
-                    </button>
-                </div>
-
+                <div class="create-section"><a href="#formulario" style="text-decoration: none; ">
+                        <button class="btn-create-sidebar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>Nueva receta</span>
+                        </button>
+                </div></a>
                 <div class="sidebar-user">
                     <img src="img/usuario.png" alt="Usuario" class="user-avatar">
                     <div class="user-info">
@@ -78,11 +188,9 @@
                 </div>
             </div>
         </aside>
-
-        <!-- Main Content -->
+        <!-- Contenido principal -->
         <main class="main">
-
-            <!-- Botón menú (siempre visible) -->
+            <!-- Botón menú solo visible en dispositivos móviles y pantallas pequeñas -->
             <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menú">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -90,7 +198,6 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
-
             <!-- Header -->
             <header class="header">
                 <div class="header-logo">
@@ -101,7 +208,6 @@
                     </div>
                 </div>
             </header>
-
             <!-- Search Form -->
             <form class="search-form">
                 <div class="search-wrapper">
@@ -114,7 +220,6 @@
                 </div>
                 <button type="submit" class="search-btn">Buscar</button>
             </form>
-
             <!-- Recetas populares -->
             <section class="popular-section">
                 <div class="section-header">
@@ -123,7 +228,6 @@
                         Recetas populares
                     </h2>
                 </div>
-
                 <div class="keywords">
                     <div class="keyword-card">
                         <div class="keyword-image">
@@ -175,7 +279,6 @@
                     </div>
                 </div>
             </section>
-
             <!-- Premium -->
             <section class="premium">
                 <div class="premium-content">
@@ -189,7 +292,6 @@
                         </h3>
                         <span class="premium-badge">✨ Exclusivo</span>
                     </div>
-
                     <div class="premium-grid">
                         <div class="premium-card">
                             <img src="img/pollo_horno.png" alt="Pollo al horno">
@@ -223,45 +325,111 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Footer image: ancho completo del main -->
+                <!-- FORMULARIO DE NUEVA RECETA -->
+                <section class="form-receta" id="formulario">
+                    <h2 class="section-title">
+                        <span class="title-icon">🍳</span>
+                        Crea tu receta
+                    </h2>
+                    <p class="form-subtitle">Comparte tus mejores creaciones culinarias con la comunidad Cookpad.</p>
+                    <form method="post" enctype="multipart/form-data" action="procesarReceta.php" target="_blank"
+                        onsubmit="return abrirNuevaVentana()" class="receta-form">
+                        <!-- Nombre -->
+                        <label for="nombre">Nombre de la receta <span class="required">*</span></label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Tarta de manzana casera" required>
+                        <!-- Descripción -->
+                        <label for="descripcion">Descripción o historia <span class="required">*</span></label>
+                        <textarea id="descripcion" name="descripcion" rows="4"
+                            placeholder="Cuenta brevemente sobre la receta o su origen..." required></textarea>
+                        <!-- Categoría -->
+                        <label for="categoria">Tipo de plato <span class="required">*</span></label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="" disabled selected>Seleccione una categoría</option>
+                            <option value="desayuno">Desayuno</option>
+                            <option value="almuerzo">Almuerzo</option>
+                            <option value="cena">Cena</option>
+                            <option value="postre">Postre</option>
+                            <option value="snack">Snack</option>
+                            <option value="bebida">Bebida</option>
+                        </select>
+                        <!-- Dificultad -->
+                        <label>Nivel de dificultad <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="dificultad" value="Fácil" required> Fácil</label>
+                            <label><input type="radio" name="dificultad" value="Media"> Media</label>
+                            <label><input type="radio" name="dificultad" value="Difícil"> Difícil</label>
+                        </div>
+                        <!-- Tiempo -->
+                        <label for="tiempo">Tiempo de preparación (minutos) <span class="required">*</span></label>
+                        <input type="number" id="tiempo" name="tiempo" min="1" placeholder="Ej: 45" required>
+                        <!-- Ingredientes -->
+                        <label for="ingredientes">Ingredientes <span class="required">*</span></label>
+                        <textarea id="ingredientes" name="ingredientes" rows="4"
+                            placeholder="Ej: 2 huevos, 1 taza de harina, 1 manzana..." required></textarea>
+                        <!-- Preparación -->
+                        <label for="preparacion">Pasos de preparación <span class="required">*</span></label>
+                        <textarea id="preparacion" name="preparacion" rows="6"
+                            placeholder="Describe paso a paso cómo preparar la receta." required></textarea>
+                        <!-- Etiquetas -->
+                        <label>Etiquetas de la receta (opcional):</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="etiquetas[]" value="Vegana"> Vegana</label>
+                            <label><input type="checkbox" name="etiquetas[]" value="Sin gluten"> Sin gluten</label>
+                            <label><input type="checkbox" name="etiquetas[]" value="Rápida"> Rápida</label>
+                            <label><input type="checkbox" name="etiquetas[]" value="Económica"> Económica</label>
+                        </div>
+                        <!-- Imagen -->
+                        <label for="imagen">Imagen del plato <span class="required">*</span></label>
+                        <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                        <!-- Autor -->
+                        <label for="email">Correo electrónico del autor <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" required>
+                        <!-- Fecha -->
+                        <label for="fecha">Fecha de publicación <span class="required">*</span></label>
+                        <input type="date" id="fecha" name="fecha" required>
+                        <!-- Botones -->
+                        <div class="form-buttons">
+                            <input type="submit" value="Publicar Receta">
+                            <input type="reset" value="Limpiar Formulario">
+                        </div>
+                    </form>
+                </section>
+                <!-- imagen del footer -->
                 <div class="img-footer">
                     <img src="img/footer.png" alt="footer">
                 </div>
             </section>
-
         </main>
     </div>
 
     <script>
+        // Script para el funcionamiento del sidebar
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
-
         const toggleSidebar = (open) => {
             const isOpen = sidebar.classList.contains('active');
             const shouldOpen = open !== undefined ? open : !isOpen;
-
             sidebar.classList.toggle('active', shouldOpen);
             sidebar.classList.toggle('closed', !shouldOpen);
             sidebarOverlay.classList.toggle('active', shouldOpen);
             document.body.classList.toggle('sidebar-open', shouldOpen);
             document.body.classList.toggle('sidebar-closed', !shouldOpen);
         };
-
         sidebarToggle.addEventListener('click', () => toggleSidebar());
         sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
-
         // Cerrar al hacer clic en nav-item (solo en móvil)
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
                 if (window.innerWidth <= 992) toggleSidebar(false);
             });
         });
-        
+        // Abrir formulario en nueva ventana
+        function abrirNuevaVentana() {
+            // Esto asegura que se abra en una nueva pestaña/ventana
+            return true; // permite el envío
+        }
     </script>
-
-
 </body>
 
 </html>

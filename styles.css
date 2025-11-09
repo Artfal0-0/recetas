@@ -293,7 +293,8 @@ body.sidebar-open {
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 998; /* más bajo que el sidebar */
+    z-index: 998;
+    /* más bajo que el sidebar */
     background: var(--white);
     border: 2px solid var(--border-color);
     border-radius: var(--radius-sm);
