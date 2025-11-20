@@ -5,431 +5,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recetas Deliciosas</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
-<style>
-    /* estilos unicamente para el formulario de recetas */
-    .form-receta {
-        background: var(--white);
-        padding: 40px;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-md);
-        border: 2px solid var(--border-color);
-        margin-top: 40px;
-    }
 
-    .form-receta .section-title {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--primary-color);
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+<body class="bg-warning-subtle">
 
-    .form-receta .form-subtitle {
-        color: var(--text-medium);
-        font-size: 15px;
-        margin-bottom: 32px;
-    }
+    <!-- Offcanvas Sidebar (móvil) -->
+    <div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="sidebarOffcanvas" style="width: 280px;">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold text-warning">
+                <img src="img/logo.png" width="40" class="me-2 rounded"> Recetas
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-4 d-flex flex-column">
+            <!-- Menú -->
+            <button
+                class="w-100 text-start btn btn-light-subtle rounded-4 mb-2 py-3 px-4 d-flex align-items-center gap-3 active">
+                <span class="fw-semibold">Buscar</span>
+            </button>
+            <button
+                class="w-100 text-start btn btn-light-subtle rounded-4 mb-2 py-3 px-4 d-flex align-items-center gap-3">
+                <i class="bi bi-star-fill fs-5 text-warning"></i> <span class="fw-semibold">Premium</span>
+            </button>
+            <button
+                class="w-100 text-start btn btn-light-subtle rounded-4 mb-2 py-3 px-4 d-flex align-items-center gap-3">
+                <span class="fw-semibold">Retos</span>
+            </button>
 
-    .receta-form label {
-        display: block;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 8px;
-        margin-top: 18px;
-    }
+            <div class="border-top border-bottom border-warning-subtle py-4 my-4">
+                <a href="#formulario"
+                    class="btn btn-warning w-100 rounded-4 py-3 fw-bold d-flex align-items-center justify-content-center gap-2 shadow">
+                    Nueva receta
+                </a>
+            </div>
 
-    .receta-form .required {
-        color: red;
-    }
-
-    .receta-form input[type="text"],
-    .receta-form input[type="email"],
-    .receta-form input[type="number"],
-    .receta-form input[type="date"],
-    .receta-form select,
-    .receta-form textarea,
-    .receta-form input[type="file"] {
-        width: 100%;
-        padding: 14px 16px;
-        border: 2px solid var(--border-color);
-        border-radius: var(--radius-md);
-        background: var(--background-alt);
-        font-size: 15px;
-        color: var(--text-dark);
-        transition: var(--transition);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .receta-form input:focus,
-    .receta-form textarea:focus,
-    .receta-form select:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-    }
-
-    .radio-group,
-    .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 8px;
-    }
-
-    .radio-group label,
-    .checkbox-group label {
-        font-weight: 500;
-        color: var(--text-medium);
-    }
-
-    .form-buttons {
-        display: flex;
-        gap: 16px;
-        margin-top: 32px;
-    }
-
-    .form-buttons input[type="submit"],
-    .form-buttons input[type="reset"] {
-        flex: 1;
-        padding: 14px;
-        font-weight: 700;
-        border: none;
-        border-radius: var(--radius-md);
-        cursor: pointer;
-        transition: var(--transition);
-        box-shadow: var(--shadow-md);
-    }
-
-    .form-buttons input[type="submit"] {
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-        color: white;
-    }
-
-    .form-buttons input[type="submit"]:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .form-buttons input[type="reset"] {
-        background: var(--background-alt);
-        color: var(--text-dark);
-        border: 2px solid var(--border-color);
-    }
-
-    .form-buttons input[type="reset"]:hover {
-        background: var(--primary-color);
-        color: white;
-        border-color: var(--primary-color);
-    }
-</style>
-
-<body>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    <div class="container">
-        <!-- barra lateral (sidebar) -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-content">
-                <div class="logo">
-                    <img src="img/logo.png" alt="Logo">
-                    <span>Recetas</span>
+            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4">
+                <img src="img/usuario.png" alt="Usuario" class="rounded-circle border border-warning border-3"
+                    width="50" height="50">
+                <div>
+                    <div class="fw-bold">usuario</div>
+                    <small class="text-muted">Ver perfil</small>
                 </div>
-                <nav class="nav-menu">
-                    <button class="nav-item active">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                        <span>Buscar</span>
-                    </button>
-                    <button class="nav-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                            <path d="M4 22h16"></path>
-                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                        </svg>
-                        <span>Premium</span>
-                    </button>
-                    <button class="nav-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                            <line x1="4" y1="22" x2="4" y2="15"></line>
-                        </svg>
-                        <span>Retos</span>
-                    </button>
-                </nav>
-                <!-- Crear receta -->
-                <div class="create-section"><a href="#formulario" style="text-decoration: none; ">
-                        <button class="btn-create-sidebar">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <line x1="12" y1="5" x2="12" y2="19"></line>
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                            </svg>
-                            <span>Nueva receta</span>
-                        </button>
-                </div></a>
-                <div class="sidebar-user">
-                    <img src="img/usuario.png" alt="Usuario" class="user-avatar">
-                    <div class="user-info">
-                        <span class="username">usuario</span>
-                        <span class="user-subtitle">Ver perfil</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex min-vh-100">
+
+        <!-- Sidebar Desktop (fijo solo en pantallas grandes) -->
+        <aside class="d-none d-lg-block bg-white border-end border-warning-subtle shadow-sm"
+            style="width: 280px; flex-shrink: 0;">
+            <div class="p-4 d-flex flex-column h-100">
+                <div class="bg-warning-subtle">
+                    <img src="img/logo.png" alt="Logo" width="60" height="60" class="rounded-3">
+                    <span class="fs-4 fw-bold text-warning">Recetas</span>
+                </div>
+
+                <button class="w-100 text-start btn btn-light-subtle ">
+                    <span class="fw-semibold">Buscar</span>
+                </button>
+                <button class="w-100 text-start btn btn-light-subtle ">
+                    <span class="fw-semibold">Premium</span>
+                </button>
+                <button class="w-100 text-start btn btn-light-subtle ">
+                    <span class="fw-semibold">Retos</span>
+                </button>
+
+                <div>
+                    <a href="#formulario" class="btn btn-warning w-100">
+                        Nueva receta
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4 mt-auto">
+                    <img src="img/usuario.png" alt="Usuario" width="52" height="52">
+                    <div>
+                        <div>usuario</div>
+                        <small>Ver perfil</small>
                     </div>
                 </div>
             </div>
         </aside>
-        <!-- Contenido principal -->
-        <main class="main">
-            <!-- Botón menú solo visible en dispositivos móviles y pantallas pequeñas -->
-            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Menú">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
+
+        <main>
             <!-- Header -->
-            <header class="header">
-                <div class="header-logo">
-                    <img src="img/logo.png" alt="Logo">
-                    <div>
-                        <h1>Búsqueda de recetas</h1>
-                        <p class="header-subtitle">Descubre y comparte tus recetas favoritas</p>
-                    </div>
-                </div>
-            </header>
-            <!-- Search Form -->
-            <form class="search-form">
-                <div class="search-wrapper">
-                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
-                    <input type="text" class="search-input" placeholder="Busca por receta o ingredientes...">
-                </div>
-                <button type="submit" class="search-btn">Buscar</button>
-            </form>
-            <!-- Recetas populares -->
-            <section class="popular-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <span class="title-icon">🔥</span>
-                        Recetas populares
-                    </h2>
-                </div>
-                <div class="keywords">
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/segundo_plato.png" alt="segundos platos">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">segundos platos</p>
-                        <span class="keyword-count">256 recetas</span>
-                    </div>
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/patatas.png" alt="patatas">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">patatas</p>
-                        <span class="keyword-count">189 recetas</span>
-                    </div>
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/desayuno.png" alt="desayuno">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">desayuno</p>
-                        <span class="keyword-count">342 recetas</span>
-                    </div>
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/albondigas.png" alt="albóndigas">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">albóndigas</p>
-                        <span class="keyword-count">127 recetas</span>
-                    </div>
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/lentejas.png" alt="lentejas">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">lentejas</p>
-                        <span class="keyword-count">98 recetas</span>
-                    </div>
-                    <div class="keyword-card">
-                        <div class="keyword-image">
-                            <img src="img/halloween.png" alt="halloween">
-                            <div class="keyword-overlay"></div>
-                        </div>
-                        <p class="keyword-text">halloween</p>
-                        <span class="keyword-count">74 recetas</span>
-                    </div>
-                </div>
-            </section>
-            <!-- Premium -->
-            <section class="premium">
-                <div class="premium-content">
-                    <div class="premium-header">
-                        <h3 class="premium-title">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                            </svg>
-                            Recetas Premium
-                        </h3>
-                        <span class="premium-badge">✨ Exclusivo</span>
-                    </div>
-                    <div class="premium-grid">
-                        <div class="premium-card">
-                            <img src="img/pollo_horno.png" alt="Pollo al horno">
-                            <div class="premium-overlay">
-                                <div class="premium-info">
-                                    <span class="premium-label">Premium</span>
-                                    <h4>Pollo al horno</h4>
-                                    <p>⏱️ 45 min | 👨‍🍳 Fácil</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="premium-card">
-                            <img src="img/ensalada_pollo.png" alt="Ensalada con pollo">
-                            <div class="premium-overlay">
-                                <div class="premium-info">
-                                    <span class="premium-label">Premium</span>
-                                    <h4>Ensalada con pollo</h4>
-                                    <p>⏱️ 20 min | 👨‍🍳 Fácil</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="premium-card">
-                            <img src="img/nuggets.png" alt="Nuggets crujientes">
-                            <div class="premium-overlay">
-                                <div class="premium-info">
-                                    <span class="premium-label">Premium</span>
-                                    <h4>Nuggets crujientes</h4>
-                                    <p>⏱️ 30 min | 👨‍🍳 Media</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FORMULARIO DE NUEVA RECETA -->
-                <section class="form-receta" id="formulario">
-                    <h2 class="section-title">
-                        <span class="title-icon">🍳</span>
-                        Crea tu receta
-                    </h2>
-                    <p class="form-subtitle">Comparte tus mejores creaciones culinarias con la comunidad Cookpad.</p>
-                    <form method="post" enctype="multipart/form-data" action="procesarReceta.php" target="_blank"
-                        onsubmit="return abrirNuevaVentana()" class="receta-form">
-                        <!-- Nombre -->
-                        <label for="nombre">Nombre de la receta <span class="required">*</span></label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Tarta de manzana casera" required>
-                        <!-- Descripción -->
-                        <label for="descripcion">Descripción o historia <span class="required">*</span></label>
-                        <textarea id="descripcion" name="descripcion" rows="4"
-                            placeholder="Cuenta brevemente sobre la receta o su origen..." required></textarea>
-                        <!-- Categoría -->
-                        <label for="categoria">Tipo de plato <span class="required">*</span></label>
-                        <select id="categoria" name="categoria" required>
-                            <option value="" disabled selected>Seleccione una categoría</option>
-                            <option value="desayuno">Desayuno</option>
-                            <option value="almuerzo">Almuerzo</option>
-                            <option value="cena">Cena</option>
-                            <option value="postre">Postre</option>
-                            <option value="snack">Snack</option>
-                            <option value="bebida">Bebida</option>
-                        </select>
-                        <!-- Dificultad -->
-                        <label>Nivel de dificultad <span class="required">*</span></label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="dificultad" value="Fácil" required> Fácil</label>
-                            <label><input type="radio" name="dificultad" value="Media"> Media</label>
-                            <label><input type="radio" name="dificultad" value="Difícil"> Difícil</label>
-                        </div>
-                        <!-- Tiempo -->
-                        <label for="tiempo">Tiempo de preparación (minutos) <span class="required">*</span></label>
-                        <input type="number" id="tiempo" name="tiempo" min="1" placeholder="Ej: 45" required>
-                        <!-- Ingredientes -->
-                        <label for="ingredientes">Ingredientes <span class="required">*</span></label>
-                        <textarea id="ingredientes" name="ingredientes" rows="4"
-                            placeholder="Ej: 2 huevos, 1 taza de harina, 1 manzana..." required></textarea>
-                        <!-- Preparación -->
-                        <label for="preparacion">Pasos de preparación <span class="required">*</span></label>
-                        <textarea id="preparacion" name="preparacion" rows="6"
-                            placeholder="Describe paso a paso cómo preparar la receta." required></textarea>
-                        <!-- Etiquetas -->
-                        <label>Etiquetas de la receta (opcional):</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="etiquetas[]" value="Vegana"> Vegana</label>
-                            <label><input type="checkbox" name="etiquetas[]" value="Sin gluten"> Sin gluten</label>
-                            <label><input type="checkbox" name="etiquetas[]" value="Rápida"> Rápida</label>
-                            <label><input type="checkbox" name="etiquetas[]" value="Económica"> Económica</label>
-                        </div>
-                        <!-- Imagen -->
-                        <label for="imagen">Imagen del plato <span class="required">*</span></label>
-                        <input type="file" id="imagen" name="imagen" accept="image/*" required>
-                        <!-- Autor -->
-                        <label for="email">Correo electrónico del autor <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com" required>
-                        <!-- Fecha -->
-                        <label for="fecha">Fecha de publicación <span class="required">*</span></label>
-                        <input type="date" id="fecha" name="fecha" required>
-                        <!-- Botones -->
-                        <div class="form-buttons">
-                            <input type="submit" value="Publicar Receta">
-                            <input type="reset" value="Limpiar Formulario">
+            <div class="text-center">
+                <img src="img/logo.png" width="90" class="mb-3">
+                <h1>Búsqueda de recetas</h1>
+                <p>Encuentra y comparte las mejores recetas caseras</p>
+            </div>
+
+            <!-- Barra de búsqueda -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <form>
+                        <div>
+                            <input type="text" class="form-control border-0"
+                                placeholder="Busca por nombre o ingrediente...">
+                            <button class="btn btn-warning">Buscar</button>
                         </div>
                     </form>
-                </section>
-                <!-- imagen del footer -->
-                <div class="img-footer">
-                    <img src="img/footer.png" alt="footer">
+                </div>
+            </div>
+
+            <!-- Categorías populares -->
+            <section class="mb-5">
+                <h2 class="h4 fw-bold mb-4">Categorías populares</h2>
+                <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/segundo_plato.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Segundos</p>
+                            <small class="text-muted">256</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/patatas.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Patatas</p>
+                            <small class="text-muted">189</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/desayuno.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Desayuno</p>
+                            <small class="text-muted">342</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/albondigas.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Albóndigas</p>
+                            <small class="text-muted">127</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/lentejas.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Lentejas</p>
+                            <small class="text-muted">98</small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center">
+                            <img src="img/halloween.png" class="rounded-3 shadow-sm mb-2"
+                                style="height: 110px; width: 100%; object-fit: cover;">
+                            <p class="small fw-medium mb-0">Halloween</p>
+                            <small class="text-muted">74</small>
+                        </div>
+                    </div>
                 </div>
             </section>
-        </main>
+
+            <!-- Premium -->
+            <section class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h4 fw-bold">Recetas Premium</h2>
+                    <span class="badge bg-warning rounded-pill px-3 py-2">Exclusivo</span>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden" style="height: 240px;">
+                            <img src="img/pollo_horno.png" class="w-100 h-100" style="object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                                style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                                <span class="badge bg-warning mb-2">Premium</span>
+                                <h5 class="fw-bold">Pollo al horno</h5>
+                                <small>45 min • Fácil</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden" style="height: 240px;">
+                            <img src="img/ensalada_pollo.png" class="w-100 h-100" style="object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                                style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                                <span class="badge bg-warning mb-2">Premium</span>
+                                <h5 class="fw-bold">Ensalada con pollo</h5>
+                                <small>20 min • Fácil</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-0 shadow-sm rounded-4 overflow-hidden" style="height: 240px;">
+                            <img src="img/nuggets.png" class="w-100 h-100" style="object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 p-4 text-white"
+                                style="background: linear-gradient(transparent, rgba(0,0,0,0.8));">
+                                <span class="badge bg-warning mb-2">Premium</span>
+                                <h5 class="fw-bold">Nuggets crujientes</h5>
+                                <small>30 min • Media</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Formulario -->
+            <section id="formulario" class="bg-white rounded-4 shadow p-5">
+                <h2 class="h3 fw-bold mb-3">Crear nueva receta</h2>
+                <p class="text-muted mb-4">Comparte tu receta con la comunidad</p>
+
+                <form method="post" enctype="multipart/form-data" action="procesarReceta.php" target="_blank"
+                    class="row g-4">
+                    <div class="col-lg-8">
+                        <label class="form-label fw-semibold">Nombre de la receta *</label>
+                        <input type="text" name="nombre" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="form-label fw-semibold">Categoría *</label>
+                        <select name="categoria" class="form-select form-select-lg" required>
+                            <option value="" disabled selected>Seleccionar...</option>
+                            <option>Desayuno</option>
+                            <option>Almuerzo</option>
+                            <option>Cena</option>
+                            <option>Postre</option>
+                            <option>Snack</option>
+                            <option>Bebida</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Descripción</label>
+                        <textarea name="descripcion" rows="3" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Dificultad *</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check"><input class="form-check-input" type="radio" name="dificultad"
+                                    value="Fácil" required><label class="form-check-label">Fácil</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" name="dificultad"
+                                    value="Media"><label class="form-check-label">Media</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" name="dificultad"
+                                    value="Difícil"><label class="form-check-label">Difícil</label></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Tiempo (min) *</label>
+                        <input type="number" name="tiempo" class="form-control" min="1" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Imagen *</label>
+                        <input type="file" name="imagen" accept="image/*" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Ingredientes *</label>
+                        <textarea name="ingredientes" rows="4" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-semibold">Preparación *</label>
+                        <textarea name="preparacion" rows="5" class="form-control" required></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Email *</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Fecha *</label>
+                        <input type="date" name="fecha" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-warning btn-lg px-5 fw-bold">Publicar receta</button>
+                        <button type="reset" class="btn btn-outline-secondary btn-lg ms-3">Limpiar</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="mt-5">
+                <img src="img/footer.png" class="w-100 rounded-4 shadow" alt="footer">
+            </div>
     </div>
 
-    <script>
-        // Script para el funcionamiento del sidebar
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const toggleSidebar = (open) => {
-            const isOpen = sidebar.classList.contains('active');
-            const shouldOpen = open !== undefined ? open : !isOpen;
-            sidebar.classList.toggle('active', shouldOpen);
-            sidebar.classList.toggle('closed', !shouldOpen);
-            sidebarOverlay.classList.toggle('active', shouldOpen);
-            document.body.classList.toggle('sidebar-open', shouldOpen);
-            document.body.classList.toggle('sidebar-closed', !shouldOpen);
-        };
-        sidebarToggle.addEventListener('click', () => toggleSidebar());
-        sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
-        // Cerrar al hacer clic en nav-item (solo en móvil)
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                if (window.innerWidth <= 992) toggleSidebar(false);
-            });
-        });
-        // Abrir formulario en nueva ventana
-        function abrirNuevaVentana() {
-            // Esto asegura que se abra en una nueva pestaña/ventana
-            return true; // permite el envío
-        }
-    </script>
+    </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
