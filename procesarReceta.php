@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-body p-5">
 
                     <?php if ($ruta_imagen): ?>
-                        <img src="<?= $ruta_imagen ?>" class="w-100 rounded-4 shadow-sm mb-4" style="max-height: 420px; object-fit: cover;" alt="<?= $nombre ?>">
+                        <img src="<?= $ruta_imagen ?>" class="w-100 rounded-4 shadow-sm mb-4" alt="<?= $nombre ?>">
                     <?php endif; ?>
 
                     <div class="row text-muted small mb-4">
